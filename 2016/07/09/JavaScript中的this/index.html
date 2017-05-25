@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.3.3 -->
+
+    <!-- Title -->
+    
+    <title>
+        
+            JavaScript中的this | 
+        
+        Little_ONE的博客
+    </title>
+
+    <!-- Meta & Info -->
+    <meta charset="utf-8">
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    
+    
+    
+    
+    
+    
+
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="Little_ONE">
+    <meta name="description" content="null">
+    <meta name="keywords" content="null,JavaScript">
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Little_ONE的博客">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://yoursite.com">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="JavaScript中的this | Little_ONE的博客">
+    <meta property="og:description" content="null">
+    <meta property="og:article:tag" content="JavaScript"> 
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS & jQuery -->
+    
+        <link rel="stylesheet" href="/css/material.min.css">
+        <link rel="stylesheet" href="/css/style.min.css">
+        <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/queue.js"></script>
+    
+
+    <!-- UC Browser Compatible -->
+    <script>
+        var agent = navigator.userAgent.toLowerCase();
+        if(agent.indexOf('ucbrowser')>0) {
+            document.write("<link rel=\"stylesheet\" href=\"/css/uc.css\">");
+            alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+        }
+    </script>
+
+    
+
+    
+
+
+    <!-- Bing Background -->
+    
+
+    <!-- Custom Head -->
+    
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1、函数用圆括号调用，函数的上下文是window对象"><span class="post-toc-number">1.</span> <span class="post-toc-text">1、函数用圆括号调用，函数的上下文是window对象</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2、函数如果作为一个对象的方法，对象打点调用，函数的上下文就是这个对象"><span class="post-toc-number">2.</span> <span class="post-toc-text">2、函数如果作为一个对象的方法，对象打点调用，函数的上下文就是这个对象</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3、函数是事件处理函数，函数的上下文就是触发这个事件的对象"><span class="post-toc-number">3.</span> <span class="post-toc-text">3、函数是事件处理函数，函数的上下文就是触发这个事件的对象</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4、定时器调用函数，上下文是window对象"><span class="post-toc-number">4.</span> <span class="post-toc-text">4、定时器调用函数，上下文是window对象</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5、数组中存放的函数，被数组索引之后加圆括号调用，this就是这个数组"><span class="post-toc-number">5.</span> <span class="post-toc-text">5、数组中存放的函数，被数组索引之后加圆括号调用，this就是这个数组</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#6、用new关键字调用构造函数，this会绑定到生成的对象身上"><span class="post-toc-number">6.</span> <span class="post-toc-text">6、用new关键字调用构造函数，this会绑定到生成的对象身上</span></a></li></ol>
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script>
+    var randomNum = Math.floor(Math.random() * 41 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                JavaScript中的this
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Little_ONE</strong>
+        <span>7月 09, 2016</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/JavaScript/">JavaScript</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=JavaScript中的this&url=http://yoursite.com//2016/07/09/JavaScript中的this/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=JavaScript中的this&url=http://yoursite.com//2016/07/09/JavaScript中的this/index.html&via=Little_ONE" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com//2016/07/09/JavaScript中的this/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://yoursite.com//2016/07/09/JavaScript中的this/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=Little_ONE的博客&title=JavaScript中的this&summary=null&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2016/07/09/JavaScript中的this/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>&emsp;&emsp;JavaScript中有一个重要的概念就是是函数的上下文（context）。所谓的上下文就是指函数里面的this是谁。特别对于初学者来说，函数里的this是一个让人很困扰的问题，而我也是踩过很多坑，看了很多技术牛人的分享，也才慢慢懂了其中的一点道道儿。现在就把我自己的总结和体悟分享出来。如果发现那里有错误或者歧义，也欢迎指正。<br>&emsp;&emsp;首先来看一个例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">    var obj = &#123;</div><div class="line">        xingming: &quot;小明&quot;,</div><div class="line">        age : 12,</div><div class="line">        sex : &quot;男&quot;,</div><div class="line">        sayHello : function()&#123;</div><div class="line">            alert(&quot;你好，我叫做&quot; + this.xingming+ &quot;！我的年龄是&quot; + this.age);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    obj.sayHello();  //你好我叫做小明！我的年龄是12</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;现在我们调用sayHello函数的时候，是通过obj打点调用的，所以现在这个sayHello函数的上下文就是obj对象。 即sayHello函数内部的this指向obj。<br>当一个函数当做对象的方法被调用的时候，这个函数里面的this表示这个对象。<br>但是，千万不要认为写在对象里面的函数，上下文一定是这个对象。比如下面这个例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">    var obj = &#123;</div><div class="line">        xingming : &quot;小明&quot;,</div><div class="line">        age : 12,</div><div class="line">        sex : &quot;男&quot;,</div><div class="line">        sayHello : function()&#123;</div><div class="line">            alert(&quot;你好，我叫做&quot; + this.xingming + &quot;！我的年龄是&quot; + this.age);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    var fn = obj.sayHello;  //拿出了这个函数</div><div class="line">    fn();  //直接圆括号调用！！不是对象打点调用！你好，我叫做undefined！我的年龄是undefined。</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;因为直接圆括号调用函数，所以上下文是window对象。<br>&emsp;&emsp;所以函数的上下文是什么，取决于函数怎么调用，而不是函数如何定义，函数的上下文是函数的调用时表现的性质，不是函数定义的时候写死的性质。<br>那么如何判断函数里的上下文是谁呢，还是有规律可循的。注意，前方高能，正文开始啦~~~</p>
+<h4 id="1、函数用圆括号调用，函数的上下文是window对象"><a href="#1、函数用圆括号调用，函数的上下文是window对象" class="headerlink" title="1、函数用圆括号调用，函数的上下文是window对象"></a>1、函数用圆括号调用，函数的上下文是window对象</h4><p>比如小题目：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">    function fun()&#123;</div><div class="line">        var a = 888;</div><div class="line">        alert(this.a);  //实际上访问的是window.a</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    var a = 666;</div><div class="line">    fun();   //弹出666</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;函数function fun(){}的上下文是什么？不要看它怎么定义，要看它怎么调用：此时是fun()函数名加上圆括号直接调用，此时上下文就是window对象。而我们知道：所有的全局变量都是window对象的属性，（注意：函数里面的局部变量，不是window的属性，不是任何东西的属性，它就是一个变量）  程序弹出666.</p>
+<h4 id="2、函数如果作为一个对象的方法，对象打点调用，函数的上下文就是这个对象"><a href="#2、函数如果作为一个对象的方法，对象打点调用，函数的上下文就是这个对象" class="headerlink" title="2、函数如果作为一个对象的方法，对象打点调用，函数的上下文就是这个对象"></a>2、函数如果作为一个对象的方法，对象打点调用，函数的上下文就是这个对象</h4><p>比如下面的例子，我们把fun函数定义出来了，然后又把这个函数绑定给了obj对象的c属性：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">    function fun()&#123;</div><div class="line">        alert(this.a);  //相当于弹出obj.a</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //对象</div><div class="line">    var obj = &#123;</div><div class="line">        &quot;a&quot; : 10,</div><div class="line">        &quot;b&quot; : 20,</div><div class="line">        //给这个对象增加一个方法，值就是fun函数</div><div class="line">        &quot;c&quot; : fun</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //我们要看清楚函数执行的时候，是怎么执行的！！</div><div class="line">    //现在不是圆括号直接执行！！而是一个对象打点调用这个函数执行，所以函数的上下文是obj对象！！！</div><div class="line">    obj.c();   //弹出10</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<p>调用的时候，是对象.函数()此时根据规律，函数里面的this是这个对象。所以能够弹出10。</p>
+<h4 id="3、函数是事件处理函数，函数的上下文就是触发这个事件的对象"><a href="#3、函数是事件处理函数，函数的上下文就是触发这个事件的对象" class="headerlink" title="3、函数是事件处理函数，函数的上下文就是触发这个事件的对象"></a>3、函数是事件处理函数，函数的上下文就是触发这个事件的对象</h4><p>下面我们定义了一个fun，然后把这个fun当做了3个DOM元素的事件处理函数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">    //函数</div><div class="line">    function fun()&#123;</div><div class="line">        this.style.background = &quot;red&quot;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    var box1 = document.getElementById(&quot;box1&quot;);</div><div class="line">    var box2 = document.getElementById(&quot;box2&quot;);</div><div class="line">    var box3 = document.getElementById(&quot;box3&quot;);</div><div class="line"></div><div class="line">    // 把同一个函数绑定给不同的对象</div><div class="line">    // this就是点击谁就是谁</div><div class="line">    box1.onclick = fun;</div><div class="line">    box2.onclick = fun;</div><div class="line">    box3.onclick = fun;</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<p>函数不会执行，直到用户点击了某一个div标签。此时点击谁，this就是谁。</p>
+<h4 id="4、定时器调用函数，上下文是window对象"><a href="#4、定时器调用函数，上下文是window对象" class="headerlink" title="4、定时器调用函数，上下文是window对象"></a>4、定时器调用函数，上下文是window对象</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">    //函数</div><div class="line">    function fun()&#123;</div><div class="line">        alert(this.a);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    var a = 888;</div><div class="line">    setInterval(fun,1000);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<p>函数fun被定时器调用，此时函数的上下文就是window对象。每秒钟能弹出888.</p>
+<p>做一个小例子吧，点击一个盒子，2秒钟之后变红，第一感觉可能会写成这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">    var box1 = document.getElementById(&quot;box1&quot;);</div><div class="line"></div><div class="line">    box1.onclick = function()&#123;</div><div class="line">        setTimeout(function()&#123;</div><div class="line">            this.style.background = &quot;red&quot;;</div><div class="line">        &#125;,2000);</div><div class="line">    &#125;</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;然而并没有成功，这是因为setTimeout里的函数的最终调用者是定时器！所以函数的上下文是window对象。window对象没有背景颜色属性。</p>
+<p>&emsp;&emsp;那该怎么办呢？备份this，备份上下文。在定时器外面的事件处理函数中，this就是box1这个元素，此时可以备份上下文。把this存为局部变量self，后面的程序就用self指代box1。还可以用_this、that等等，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">    var box1 = document.getElementById(&quot;box1&quot;);</div><div class="line"></div><div class="line">    box1.onclick = function()&#123;</div><div class="line">        var self = this;</div><div class="line">        setTimeout(function()&#123;</div><div class="line">            self.style.background = &quot;red&quot;;</div><div class="line">        &#125;,2000);</div><div class="line">    &#125;</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<h4 id="5、数组中存放的函数，被数组索引之后加圆括号调用，this就是这个数组"><a href="#5、数组中存放的函数，被数组索引之后加圆括号调用，this就是这个数组" class="headerlink" title="5、数组中存放的函数，被数组索引之后加圆括号调用，this就是这个数组"></a>5、数组中存放的函数，被数组索引之后加圆括号调用，this就是这个数组</h4><p>比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">    function fun()&#123;</div><div class="line">        alert(this === arr); //true</div><div class="line">        alert(this.length);  //3，因为数组的长度是3</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    var arr = [fun,&quot;东风&quot;,&quot;五条&quot;];</div><div class="line">    arr[0]();</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;此时这个函数是从数组中枚举出来然后加圆括号执行的，所以最终调用者可以认为是这个数组，上下文就是这个数组。用new调用构造函数，this会绑定到生成的对象</p>
+<h4 id="6、用new关键字调用构造函数，this会绑定到生成的对象身上"><a href="#6、用new关键字调用构造函数，this会绑定到生成的对象身上" class="headerlink" title="6、用new关键字调用构造函数，this会绑定到生成的对象身上"></a>6、用new关键字调用构造函数，this会绑定到生成的对象身上</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">function Subway(speed)&#123;</div><div class="line">     this.speed=speed;</div><div class="line"> &#125;</div><div class="line"> var s=new Subway(100);</div><div class="line"> console.log(s.speed);//100;this绑定到新生成的实例身上</div></pre></td></tr></table></figure>
+<p>&emsp;&emsp;这里还不得不提一下call（）和apply（），这两个函数都是函数的方法，只有函数能够打点调用call()、apply()，表示用指定的上下文执行这个函数。<br>&emsp;&emsp;下面有一个函数fun，现在必须让fun里面的this是obj，该怎么做呢？此时可以用call、apply来指定上下文。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">    function fun()&#123;</div><div class="line">        alert(this.age);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    var obj = &#123;</div><div class="line">        &quot;name&quot; : &quot;小明&quot;,</div><div class="line">        &quot;age&quot; : 12</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    fun.call(obj);</div><div class="line">    fun.apply(obj);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<p>语法：<br>函数.call(上下文，参数一，参数二，参数三……)<br>函数.apply(上下文，[参数一，参数二，参数三……])</p>
+<p>&emsp;&emsp;两个函数的区别，体现在参数上。此时我们要执行的fun函数可以接受参数，apply需要用数组体现这些参数，而call必须用逗号隔开，罗列所有参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">    function fun(a,b,c)&#123;</div><div class="line">        alert(a+b+c);</div><div class="line">        alert(this.age);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    var obj = &#123;</div><div class="line">        &quot;name&quot; : &quot;小明&quot;,</div><div class="line">        &quot;age&quot; : 12</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    fun.call(obj,6,7,8);</div><div class="line">    fun.apply(obj,[6,7,8]);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<p>call()和apply()有什么用呢？看看求数组的最大值。<br>我们知道Math.max()方法，只接受单独罗列的参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Math.max(4,342,345,234,34,56,234)</div></pre></td></tr></table></figure></p>
+<p>不能传入数组：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Math.max([4,342,345,234,34,56,234])   //错误语法</div></pre></td></tr></table></figure></p>
+<p>所以此时可以妙用apply，apply可以接受一个数组当做函数的“罗列”的参数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Math.max.apply(window,[4,342,345,234,34,56,234]);</div></pre></td></tr></table></figure></p>
+
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+
+
+
+
+
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2016/08/11/javascript中常见的数组操作方法/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="Little_ONE's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xiaomi5577@163.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="xiaomi5577@163.com" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/" target="_self">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/05/">五月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">八月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/about" title="关于我">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                关于我
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/project" title="项目展示">
+                
+                    <i class="material-icons sidebar-material-icons">loyalty</i>
+                
+                项目展示
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                文章总数
+                <span class="sidebar-badge">3</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/twitter" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-twitter.svg);">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/facebook" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-facebook.svg);">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/u/2661618723?refer_flag=1001030101_&amp;is_all=1" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-weibo.svg);">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="https://github.com/xiaomigup" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-github.svg);">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;
+            <script type="text/javascript">
+                var fd = new Date();
+                document.write(fd.getFullYear());
+            </script>
+            &nbsp;Little_ONE的博客
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import File -->
+
+    <script src="/js/lazyload.min.js"></script>
+    <script src="/js/js.min.js"></script>
+
+
+
+    <script src="/js/nprogress.js"></script>
+
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+</script>
+
+<!-- MathJax Load-->
+
+<script>
+    <!-- Offer LazyLoad -->
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    <!-- Start Queue -->
+    $(document).ready(function(){
+        setTimeout(function(){
+            setInterval(function(){
+                queue.execNext();
+            },200);
+        },3000);
+    });
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>
