@@ -2,7 +2,8 @@
 
 
 ## JS系列
-1.[javascript中如何进行异步编程](https://github.com/xiaomigup/xiaomigup.github.io/issues/2)
+1.[javascript中如何进行异步编程](https://github.com/xiaomigup/xiaomigup.github.io/issues/2)    
+
 2.[前端路由的原理及应用](https://github.com/xiaomigup/xiaomigup.github.io/issues/3)
 
 ## 工作相关
